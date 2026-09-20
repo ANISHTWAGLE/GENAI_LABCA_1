@@ -1,0 +1,293 @@
+{
+  "config": {
+    "model": "Qwen/Qwen2.5-0.5B-Instruct",
+    "n_train": 4000,
+    "epochs": 2,
+    "n_eval": 1000,
+    "n_eval_base": 400,
+    "seed": 42,
+    "gpu": "Tesla T4"
+  },
+  "A_base_short_prompt": {
+    "system": "base / short prompt",
+    "n": 400,
+    "accuracy": 0.0075,
+    "macro_f1": 0.0167,
+    "invalid_label_rate": 0.985,
+    "sec_per_query": 0.016
+  },
+  "B_base_label_list": {
+    "system": "base / 77-label prompt",
+    "n": 400,
+    "accuracy": 0.205,
+    "macro_f1": 0.1804,
+    "invalid_label_rate": 0.34,
+    "sec_per_query": 0.038
+  },
+  "training": {
+    "minutes": 4.24,
+    "final_loss": 0.4184,
+    "trainable_params": 8798208,
+    "total_params": 502830976,
+    "percent_trainable": 1.75,
+    "loss_curve": [
+      {
+        "step": 10,
+        "loss": 4.1285
+      },
+      {
+        "step": 20,
+        "loss": 1.6773
+      },
+      {
+        "step": 30,
+        "loss": 1.0066
+      },
+      {
+        "step": 40,
+        "loss": 0.5659
+      },
+      {
+        "step": 50,
+        "loss": 0.4372
+      },
+      {
+        "step": 60,
+        "loss": 0.3618
+      },
+      {
+        "step": 70,
+        "loss": 0.2709
+      },
+      {
+        "step": 80,
+        "loss": 0.2701
+      },
+      {
+        "step": 90,
+        "loss": 0.2272
+      },
+      {
+        "step": 100,
+        "loss": 0.1798
+      },
+      {
+        "step": 110,
+        "loss": 0.169
+      },
+      {
+        "step": 120,
+        "loss": 0.1336
+      },
+      {
+        "step": 130,
+        "loss": 0.1178
+      },
+      {
+        "step": 140,
+        "loss": 0.0871
+      },
+      {
+        "step": 150,
+        "loss": 0.079
+      },
+      {
+        "step": 160,
+        "loss": 0.0757
+      },
+      {
+        "step": 170,
+        "loss": 0.0938
+      },
+      {
+        "step": 180,
+        "loss": 0.0665
+      },
+      {
+        "step": 190,
+        "loss": 0.08
+      },
+      {
+        "step": 200,
+        "loss": 0.0578
+      },
+      {
+        "step": 210,
+        "loss": 0.0702
+      },
+      {
+        "step": 220,
+        "loss": 0.0903
+      },
+      {
+        "step": 230,
+        "loss": 0.0675
+      },
+      {
+        "step": 240,
+        "loss": 0.0617
+      },
+      {
+        "step": 250,
+        "loss": 0.0836
+      }
+    ]
+  },
+  "C_finetuned": {
+    "system": "lora / short prompt",
+    "n": 1000,
+    "accuracy": 0.872,
+    "macro_f1": 0.8691,
+    "invalid_label_rate": 0.006,
+    "sec_per_query": 0.013
+  },
+  "C_finetuned_same_subset": {
+    "system": "lora / short prompt (base subset)",
+    "n": 400,
+    "accuracy": 0.8525,
+    "macro_f1": 0.8449,
+    "invalid_label_rate": 0.0075,
+    "sec_per_query": 0.013
+  },
+  "worst_intents": [
+    {
+      "intent": "card_acceptance",
+      "n": 8,
+      "accuracy": 0.5
+    },
+    {
+      "intent": "card_swallowed",
+      "n": 15,
+      "accuracy": 0.533
+    },
+    {
+      "intent": "beneficiary_not_allowed",
+      "n": 13,
+      "accuracy": 0.538
+    },
+    {
+      "intent": "transfer_not_received_by_recipient",
+      "n": 14,
+      "accuracy": 0.643
+    },
+    {
+      "intent": "supported_cards_and_currencies",
+      "n": 9,
+      "accuracy": 0.667
+    },
+    {
+      "intent": "verify_my_identity",
+      "n": 9,
+      "accuracy": 0.667
+    },
+    {
+      "intent": "transfer_timing",
+      "n": 9,
+      "accuracy": 0.667
+    },
+    {
+      "intent": "top_up_failed",
+      "n": 15,
+      "accuracy": 0.667
+    }
+  ],
+  "top_confusions": [
+    {
+      "true": "card_payment_not_recognised",
+      "predicted_as": "direct_debit_payment_not_recognised",
+      "count": 3
+    },
+    {
+      "true": "extra_charge_on_statement",
+      "predicted_as": "card_payment_fee_charged",
+      "count": 3
+    },
+    {
+      "true": "top_up_failed",
+      "predicted_as": "pending_top_up",
+      "count": 3
+    },
+    {
+      "true": "card_payment_fee_charged",
+      "predicted_as": "card_payment_not_recognised",
+      "count": 2
+    },
+    {
+      "true": "card_acceptance",
+      "predicted_as": "atm_support",
+      "count": 2
+    },
+    {
+      "true": "card_swallowed",
+      "predicted_as": "lost_or_stolen_card",
+      "count": 2
+    },
+    {
+      "true": "compromised_card",
+      "predicted_as": "direct_debit_payment_not_recognised",
+      "count": 2
+    },
+    {
+      "true": "top_up_by_bank_transfer_charge",
+      "predicted_as": "transfer_fee_charged",
+      "count": 2
+    }
+  ],
+  "probes": {
+    "plain": {
+      "accuracy": 0.832,
+      "invalid_label_rate": 0.012,
+      "flip_rate": 0.0,
+      "change_in_points": 0.0
+    },
+    "indian_english": {
+      "accuracy": 0.804,
+      "invalid_label_rate": 0.016,
+      "flip_rate": 0.08,
+      "change_in_points": -2.8
+    },
+    "hinglish": {
+      "accuracy": 0.744,
+      "invalid_label_rate": 0.024,
+      "flip_rate": 0.188,
+      "change_in_points": -8.8
+    },
+    "typos": {
+      "accuracy": 0.556,
+      "invalid_label_rate": 0.02,
+      "flip_rate": 0.416,
+      "change_in_points": -27.6
+    },
+    "shouting_caps": {
+      "accuracy": 0.824,
+      "invalid_label_rate": 0.008,
+      "flip_rate": 0.136,
+      "change_in_points": -0.8
+    },
+    "name_arjun": {
+      "accuracy": 0.836,
+      "invalid_label_rate": 0.012,
+      "flip_rate": 0.04,
+      "change_in_points": 0.4
+    },
+    "name_ananya": {
+      "accuracy": 0.836,
+      "invalid_label_rate": 0.012,
+      "flip_rate": 0.032,
+      "change_in_points": 0.4
+    },
+    "name_mohammed": {
+      "accuracy": 0.84,
+      "invalid_label_rate": 0.012,
+      "flip_rate": 0.036,
+      "change_in_points": 0.8
+    },
+    "name_john": {
+      "accuracy": 0.84,
+      "invalid_label_rate": 0.012,
+      "flip_rate": 0.036,
+      "change_in_points": 0.8
+    }
+  },
+  "name_swap_spread_points": 0.4
+}
